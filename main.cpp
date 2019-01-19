@@ -17,10 +17,10 @@ public:
     }
 };
 
-class Sum2 {
+class Mul {
 public:
     virtual int operator()(int a, int b) const {
-        return a + b;
+        return a * b;
     }
 };
 
@@ -33,9 +33,13 @@ int main() {
     Function<int(int)> f1(i1);
     assert(f1(1) == 1);
 
-    auto s2 = Sum2();
+    auto s2 = Mul();
     Function<int(int, int)> f2(s2);
-    assert(f2(1, 2) == 3);
+    assert(f2(4, 2) == 8);
+
+    f.swap(f2);
+    assert(f(5, 6) == 30);
+    assert(f2(5, 6) == 11);
 
     return 0;
 }
