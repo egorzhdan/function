@@ -20,10 +20,16 @@ public:
     }
 };
 
+bool destrCalled = false;
+
 class Concat {
 public:
     virtual string operator()(const string &a, const string &b) const {
         return a + b + "KEK";
+    }
+
+    virtual ~Concat() {
+        destrCalled = true;
     }
 };
 
