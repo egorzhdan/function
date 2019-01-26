@@ -52,7 +52,7 @@ public:
 
     Function(const Function &other) : is_small(other.is_small) {
         if (is_small) {
-            other.call->clone(small);
+            other.call->cloneInPlace(small);
         } else {
             call = other.call->clone();
         }
