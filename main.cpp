@@ -1,19 +1,15 @@
 #include <iostream>
+#include <string>
 #include <type_traits>
 #include <memory>
 #include "Function.h"
 
-class Sum : public Function<int(int, int)>::Call {
-public:
-    virtual int operator()(int a, int b) const override {
-        return a + b;
-    }
-};
+using namespace std;
 
-class Id : public Function<int(int)>::Call {
+class Sum {
 public:
-    virtual int operator()(int arg) const override {
-        return arg;
+    virtual int operator()(int a, int b) const {
+        return a + b;
     }
 };
 
@@ -24,22 +20,29 @@ public:
     }
 };
 
-int main() {
-    Sum s;
-    Function<int(int, int)> f(s);
-    assert(f(1, 2) == 3);
+class Concat {
+public:
+    virtual string operator()(const string &a, const string &b) const {
+        return a + b + "KEK";
+    }
+};
 
-    Id i1;
-    Function<int(int)> f1(i1);
-    assert(f1(1) == 1);
+int main() {
+    auto s = Sum();
+    Function<int(int, int)> f(s);
+    assert(f(4, 2) == 6);
 
     auto s2 = Mul();
     Function<int(int, int)> f2(s2);
     assert(f2(4, 2) == 8);
 
     f.swap(f2);
-    assert(f(5, 6) == 30);
-    assert(f2(5, 6) == 11);
+    assert(f(4, 2) == 8);
+    assert(f2(4, 2) == 6);
+
+    Concat c;
+    Function<string(const string&, const string&)> big(c);
+    assert(big("a", "b") == "abKEK");
 
     return 0;
 }
