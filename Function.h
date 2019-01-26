@@ -7,7 +7,7 @@
 #include <vector>
 #include <type_traits>
 
-#define SMALL_SIZE sizeof(std::unique_ptr<Call>)
+#define SMALL_SIZE 32
 
 template<class T>
 class Function;
@@ -68,7 +68,7 @@ public:
 
     template<class F>
     Function(F f) {
-        if (sizeof(f) < SMALL_SIZE * sizeof(char)) {
+        if (sizeof(WrappingCall<F>) < SMALL_SIZE * sizeof(char)) {
             is_small = true;
             new(small) WrappingCall<F>(f);
         } else {

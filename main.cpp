@@ -2,6 +2,7 @@
 #include <string>
 #include <type_traits>
 #include <memory>
+#include <cassert>
 #include "Function.h"
 
 using namespace std;
