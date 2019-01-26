@@ -7,7 +7,7 @@
 #include <vector>
 #include <type_traits>
 
-#define SMALL_SIZE 8
+#define SMALL_SIZE sizeof(std::unique_ptr<Call>)
 
 template<class T>
 class Function;
@@ -22,6 +22,8 @@ public:
         virtual void cloneInPlace(char *dest) = 0;
 
         virtual std::unique_ptr<Call> clone() = 0;
+
+        virtual ~Call() = default;
     };
 
     template<typename Callable>

@@ -44,5 +44,9 @@ int main() {
     Function<string(const string&, const string&)> big(c);
     assert(big("a", "b") == "abKEK");
 
+    Function<int(int, int)> fn;
+    assert(!fn);
+    assert(f);
+
     return 0;
 }
